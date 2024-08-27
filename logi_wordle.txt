@@ -1,0 +1,267 @@
+stage {
+    default backdrop Fehér("gallery:General/White")
+    sound Boing("gallery:Effects/Boing")
+    let word = "crate";
+    let game_on = true;
+    let guess;
+    let round = 1;
+    let words = [  ];
+    when started {
+        words = [  ];
+        words.push("ACTOR");
+        words.push("FIGHT");
+        words.push("LOVED");
+        words.push("MEOWS");
+        words.push("MOVIE");
+        words.push("PIZZA");
+        words.push("AWARD");
+        words.push("BEACH");
+        words.push("DREAM");
+        words.push("DRINK");
+        words.push("FAITH");
+        words.push("ADOPT");
+        words.push("BEGIN");
+        words.push("THERE");
+        words.push("WHERE");
+        words.push("ABOVE");
+        words.push("BRAVE");
+        words.push("LUNCH");
+        words.push("MUSIC");
+        words.push("NORTH");
+        words.push("PARTY");
+        words.push("PLANE");
+        words.push("RADIO");
+        words.push("SPORT");
+        word = words[Math.randomBetween(0, words.length - 1)];
+        while(true) {
+            this.wait(1);
+            if(game_on) {
+                this.broadcastAndWait("start_guess");
+            }
+        }
+    }
+    when signalReceived("start_guess") {
+        if(game_on) {
+            this.wait(1);
+            guess = this.ask("Type your guess:");
+            if(!(guess.length == 5)) {
+                this.playSound(this.Boing);
+                this.broadcast("start_guess");
+            }
+            else {
+                this.broadcast("check");
+            }
+        }
+    }
+    when signalReceived("check") {
+        if(guess.charAt1(1) == word.charAt1(1).toLowerCase()) {
+            this.Négyzet.x = -60;
+            this.Négyzet.setCostume(Négyzet.Négyzet_Zöld);
+            this.Négyzet.stampCostume();
+        }
+        else {
+            if(word.toLowerCase().includes(guess.charAt1(1))) {
+                this.Négyzet.x = -60;
+                this.Négyzet.setCostume(Négyzet.Négyzet_Sárga);
+                this.Négyzet.stampCostume();
+            }
+            else {
+                this.Négyzet.x = -60;
+                this.Négyzet.setCostume(Négyzet.Négyzet_Fekete);
+                this.Négyzet.stampCostume();
+            }
+        }
+        if(guess.charAt1(2) == word.charAt1(2).toLowerCase()) {
+            this.Négyzet.x = -30;
+            this.Négyzet.setCostume(Négyzet.Négyzet_Zöld);
+            this.Négyzet.stampCostume();
+        }
+        else {
+            if(word.toLowerCase().includes(guess.charAt1(2))) {
+                this.Négyzet.x = -30;
+                this.Négyzet.setCostume(Négyzet.Négyzet_Sárga);
+                this.Négyzet.stampCostume();
+            }
+            else {
+                this.Négyzet.x = -30;
+                this.Négyzet.setCostume(Négyzet.Négyzet_Fekete);
+                this.Négyzet.stampCostume();
+            }
+        }
+        if(guess.charAt1(3) == word.charAt1(3).toLowerCase()) {
+            this.Négyzet.x = 0;
+            this.Négyzet.setCostume(Négyzet.Négyzet_Zöld);
+            this.Négyzet.stampCostume();
+        }
+        else {
+            if(word.toLowerCase().includes(guess.charAt1(3))) {
+                this.Négyzet.x = 0;
+                this.Négyzet.setCostume(Négyzet.Négyzet_Sárga);
+                this.Négyzet.stampCostume();
+            }
+            else {
+                this.Négyzet.x = 0;
+                this.Négyzet.setCostume(Négyzet.Négyzet_Fekete);
+                this.Négyzet.stampCostume();
+            }
+        }
+        if(guess.charAt1(4) == word.charAt1(4).toLowerCase()) {
+            this.Négyzet.x = 30;
+            this.Négyzet.setCostume(Négyzet.Négyzet_Zöld);
+            this.Négyzet.stampCostume();
+        }
+        else {
+            if(word.toLowerCase().includes(guess.charAt1(4))) {
+                this.Négyzet.x = 30;
+                this.Négyzet.setCostume(Négyzet.Négyzet_Sárga);
+                this.Négyzet.stampCostume();
+            }
+            else {
+                this.Négyzet.x = 30;
+                this.Négyzet.setCostume(Négyzet.Négyzet_Fekete);
+                this.Négyzet.stampCostume();
+            }
+        }
+        if(guess.charAt1(5) == word.charAt1(5).toLowerCase()) {
+            this.Négyzet.x = 60;
+            this.Négyzet.setCostume(Négyzet.Négyzet_Zöld);
+            this.Négyzet.stampCostume();
+        }
+        else {
+            if(word.toLowerCase().includes(guess.charAt1(5))) {
+                this.Négyzet.x = 60;
+                this.Négyzet.setCostume(Négyzet.Négyzet_Sárga);
+                this.Négyzet.stampCostume();
+            }
+            else {
+                this.Négyzet.x = 60;
+                this.Négyzet.setCostume(Négyzet.Négyzet_Fekete);
+                this.Négyzet.stampCostume();
+            }
+        }
+        if(word.toLowerCase() == guess || round >= 6) {
+            game_on = false;
+            this.Négyzet.say("Solution: " + word)
+        }
+        round += 1;
+        this.Négyzet.y -= 30;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    actor Betű {
+        costume A("gallery:Text/A")
+        costume B("gallery:Text/B")
+        costume C("gallery:Text/C")
+        costume D("gallery:Text/D")
+        costume E("gallery:Text/E")
+        costume F("gallery:Text/F")
+        costume G("gallery:Text/G")
+        costume H("gallery:Text/H")
+        costume I("gallery:Text/I")
+        costume J("gallery:Text/J")
+        costume K("gallery:Text/K")
+        costume L("gallery:Text/L")
+        costume M("gallery:Text/M")
+        costume N("gallery:Text/N")
+        costume O("gallery:Text/O")
+        costume P("gallery:Text/P")
+        costume Q("gallery:Text/Q")
+        costume R("gallery:Text/R")
+        costume S("gallery:Text/S")
+        costume T("gallery:Text/T")
+        costume U("gallery:Text/U")
+        costume V("gallery:Text/V")
+        costume W("gallery:Text/W")
+        costume X("gallery:Text/X")
+        costume Y("gallery:Text/Y")
+        costume Z("gallery:Text/Z")
+        costume És("gallery:Text/Et")
+        costume Kukac("gallery:Text/At")
+        when stage.started {
+            this.hide();
+            clearPenTrails();
+            this.setPosition(-20, 140);
+            this.size = 80;
+            this.setCostume(this.R);
+            this.stampCostume();
+            this.x -= 50;
+            this.setCostume(this.O);
+            this.stampCostume();
+            this.x -= 50;
+            this.setCostume(this.W);
+            this.stampCostume();
+            this.x += 150;
+            this.setCostume(this.D);
+            this.stampCostume();
+            this.x += 50;
+            this.setCostume(this.L);
+            this.stampCostume();
+            this.x += 50;
+            this.setCostume(this.E);
+            this.stampCostume();
+            this.y = 70;
+        }
+        when stage.signalReceived("check") {
+            this.wait(0.5);
+            this.size = 30;
+            this.x = -60;
+            for(let i = 1; i <= 5; i++) {
+                this.setCostume(guess[i - 1].toUpperCase());
+                this.stampCostume();
+                this.x += 30;
+            }
+            this.y -= 30;
+        }
+    }
+    
+    actor Négyzet {
+        costume Négyzet_Fehér("gallery:Objects/Square White")
+        costume Négyzet_Sárga("gallery:Objects/Square Yellow")
+        costume Négyzet_Szürke("gallery:Objects/Square Grey")
+        costume Négyzet_Zöld("gallery:Objects/Square Green")
+        costume Négyzet_Fekete("gallery:Objects/Square Black")
+        when stage.started {
+            this.hide();
+            this.setCostume(this.Négyzet_Szürke);
+            this.setPosition(0, 70);
+            for(let i = 1; i <= 6; i++) {
+                this.stampCostume();
+                this.x -= 30;
+                this.stampCostume();
+                this.x -= 30;
+                this.stampCostume();
+                this.x += 90;
+                this.stampCostume();
+                this.x += 30;
+                this.stampCostume();
+                this.y -= 30;
+                this.x -= 60;
+            }
+            this.setPosition(0, 70);
+        }
+    }
+}
